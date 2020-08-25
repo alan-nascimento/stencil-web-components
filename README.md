@@ -1,3 +1,3 @@
 # stencil web components
 
-Starting 
+Starting the project
