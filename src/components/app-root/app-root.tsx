@@ -13,7 +13,7 @@ export class AppRoot {
         </header>
 
         <main>
-
+          <app-todo />
         </main>
       </div>
     );
