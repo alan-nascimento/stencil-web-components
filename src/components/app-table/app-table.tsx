@@ -1,18 +1,20 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'app-table',
-  styleUrl: 'app-table.css',
   shadow: true,
 })
 export class AppTable {
+  @Prop()
+  tasks: string[] = [];
 
   render() {
     return (
-      <Host>
-        <slot></slot>
-      </Host>
+      <ul>
+        {this.tasks.map((task, index) => (
+          <li key={index}>{task}</li>
+        ))}
+      </ul>
     );
   }
-
 }

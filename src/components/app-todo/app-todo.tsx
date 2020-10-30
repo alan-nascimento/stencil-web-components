@@ -20,11 +20,7 @@ export class AppTodo {
     return (
       <Host>
         <app-form onAddTask={this.handleAddTask} />
-        <ul>
-          {this.tasks.map((task, index) => (
-            <li key={index}>{task}</li>
-          ))}
-        </ul>
+        <app-table tasks={this.tasks} />
       </Host>
     );
   }
