@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h, State, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'app-form',
@@ -6,13 +6,38 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class AppForm {
+  @State()
+  task: string;
+
+  @Event()
+  addTask: EventEmitter;
+
+  handleSubmit = (event: Event) => {
+    event.preventDefault();
+
+    if (this.task) {
+      this.addTask.emit(this.task);
+      this.task = null;
+    }
+  }
+
+  handleInput = (event: Event) => {
+    const input = event.target as HTMLInputElement;
+    this.task = input.value;
+  }
 
   render() {
     return (
-      <Host>
-        <slot></slot>
-      </Host>
+      <form onSubmit={this.handleSubmit}>
+        <input
+          id="description"
+          type="text"
+          name="description"
+          value={this.task}
+          onChange={this.handleInput}
+        />
+        <button type="submit">Add</button>
+      </form>
     );
   }
-
 }
